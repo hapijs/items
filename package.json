@@ -1,0 +1,29 @@
+{
+  "name": "item",
+  "description": "Bare minimum async methods",
+  "version": "1.0.0",
+  "repository": "git://github.com/hapijs/item",
+  "main": "index",
+  "keywords": [
+    "async",
+    "serial",
+    "parallel"
+  ],
+  "engines": {
+    "node": ">=0.10.30"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "lab": "4.x.x"
+  },
+  "scripts": {
+    "test": "make test-cov"
+  },
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "http://github.com/hapijs/item/raw/master/LICENSE"
+    }
+  ]
+}
