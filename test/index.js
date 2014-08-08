@@ -1,7 +1,7 @@
 // Load modules
 
 var Lab = require('lab');
-var Item = require('../');
+var Items = require('../');
 
 
 // Declare internals
@@ -19,7 +19,7 @@ var it = lab.test;
 var expect = Lab.expect;
 
 
-describe('Item', function () {
+describe('Items', function () {
 
     describe('#serial', function (done) {
 
@@ -33,7 +33,7 @@ describe('Item', function () {
                 setTimeout(next, 5);
             };
 
-            Item.serial(array, method, function (err) {
+            Items.serial(array, method, function (err) {
 
                 expect(err).to.not.exist;
                 expect(called).to.deep.equal(array);
@@ -51,7 +51,7 @@ describe('Item', function () {
                 setTimeout(next, 5);
             };
 
-            Item.serial(array, method, function (err) {
+            Items.serial(array, method, function (err) {
 
                 expect(err).to.not.exist;
                 expect(called).to.deep.equal(array);
@@ -73,7 +73,7 @@ describe('Item', function () {
                 setTimeout(next, 5);
             };
 
-            Item.serial(array, method, function (err) {
+            Items.serial(array, method, function (err) {
 
                 expect(err).to.equal('error');
                 expect(called).to.deep.equal([1, 2, 3]);
@@ -97,7 +97,7 @@ describe('Item', function () {
                 }, item[1]);
             };
 
-            Item.parallel(array, method, function (err) {
+            Items.parallel(array, method, function (err) {
 
                 expect(err).to.not.exist;
                 expect(called).to.deep.equal([1, 3, 4, 2, 5]);
@@ -118,7 +118,7 @@ describe('Item', function () {
                 }, item[1]);
             };
 
-            Item.parallel(array, method, function (err) {
+            Items.parallel(array, method, function (err) {
 
                 expect(err).to.not.exist;
                 expect(called).to.deep.equal([]);
@@ -143,7 +143,7 @@ describe('Item', function () {
                 }, item[1]);
             };
 
-            Item.parallel(array, method, function (err) {
+            Items.parallel(array, method, function (err) {
 
                 expect(err).to.equal('error');
                 expect(called).to.deep.equal([1]);

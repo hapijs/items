@@ -1,8 +1,8 @@
 {
-  "name": "item",
+  "name": "items",
   "description": "Bare minimum async methods",
   "version": "1.0.1",
-  "repository": "git://github.com/hapijs/item",
+  "repository": "git://github.com/hapijs/items",
   "main": "index",
   "keywords": [
     "async",
@@ -23,7 +23,7 @@
   "licenses": [
     {
       "type": "BSD",
-      "url": "http://github.com/hapijs/item/raw/master/LICENSE"
+      "url": "http://github.com/hapijs/items/raw/master/LICENSE"
     }
   ]
 }
