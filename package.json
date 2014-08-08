@@ -1,7 +1,7 @@
 {
   "name": "item",
   "description": "Bare minimum async methods",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "git://github.com/hapijs/item",
   "main": "index",
   "keywords": [
