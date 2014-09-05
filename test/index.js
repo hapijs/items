@@ -147,7 +147,12 @@ describe('Items', function () {
 
                 expect(err).to.equal('error');
                 expect(called).to.deep.equal([1]);
-                done();
+
+                setTimeout(function () {
+
+                    expect(called).to.deep.equal([1, 4, 2, 5]);
+                    done();
+                }, 6);
             });
         });
     });
