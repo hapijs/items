@@ -12,8 +12,6 @@ var internals = {};
 // Test shortcuts
 
 var lab = exports.lab = Lab.script();
-var before = lab.before;
-var after = lab.after;
 var describe = lab.experiment;
 var it = lab.test;
 var expect = Lab.expect;
@@ -21,7 +19,7 @@ var expect = Lab.expect;
 
 describe('Items', function () {
 
-    describe('#serial', function (done) {
+    describe('serial()', function () {
 
         it('calls methods in serial', function (done) {
 
@@ -82,7 +80,7 @@ describe('Items', function () {
         });
     });
 
-    describe('#parallel', function (done) {
+    describe('parallel()', function () {
 
         it('calls methods in parallel', function (done) {
 
