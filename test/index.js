@@ -154,4 +154,72 @@ describe('Items', function () {
             });
         });
     });
+
+    describe('parallelExec()', function () {
+
+        it('calls methods in parallel and returns the result', function (done) {
+
+            var fns = {
+                fn1: function (next) {
+
+                    next(null, 'bye');
+                },
+                fn2: function (next) {
+
+                    next(null, 'hi');
+                }
+            };
+
+            Items.parallelExec(fns, function (err, result) {
+
+                expect(err).to.not.exist;
+                expect(result.fn1).to.equal('bye');
+                expect(result.fn2).to.equal('hi');
+                done();
+            });
+        });
+
+        it('returns an empty object to the callback when passed an empty object', function (done) {
+
+            var fns = {};
+
+            Items.parallelExec(fns, function (err, result) {
+
+                expect(err).to.not.exist;
+                expect(Object.keys(result).length).to.equal(0);
+                done();
+            });
+        });
+
+        it('returns an empty object to the callback when passed a null object', function (done) {
+
+            Items.parallelExec(null, function (err, result) {
+
+                expect(err).to.not.exist;
+                expect(Object.keys(result).length).to.equal(0);
+                done();
+            });
+        });
+
+        it('exits early and result object is missing when an error is passed to callback', function (done) {
+
+            var fns = {
+                fn1: function (next) {
+
+                    next(null, 'bye');
+                },
+                fn2: function (next) {
+
+                    next(new Error('This is my error'));
+                }
+            };
+
+            Items.parallelExec(fns, function (err, result) {
+
+                expect(err).to.exist;
+                expect(result).to.not.exist;
+                done();
+            });
+        });
+    });
 });
