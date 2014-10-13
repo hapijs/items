@@ -155,7 +155,7 @@ describe('Items', function () {
         });
     });
 
-    describe('parallelExec()', function () {
+    describe('parallel.execute()', function () {
 
         it('calls methods in parallel and returns the result', function (done) {
 
@@ -170,7 +170,7 @@ describe('Items', function () {
                 }
             };
 
-            Items.parallelExec(fns, function (err, result) {
+            Items.parallel.execute(fns, function (err, result) {
 
                 expect(err).to.not.exist;
                 expect(result.fn1).to.equal('bye');
@@ -183,7 +183,7 @@ describe('Items', function () {
 
             var fns = {};
 
-            Items.parallelExec(fns, function (err, result) {
+            Items.parallel.execute(fns, function (err, result) {
 
                 expect(err).to.not.exist;
                 expect(Object.keys(result).length).to.equal(0);
@@ -193,7 +193,7 @@ describe('Items', function () {
 
         it('returns an empty object to the callback when passed a null object', function (done) {
 
-            Items.parallelExec(null, function (err, result) {
+            Items.parallel.execute(null, function (err, result) {
 
                 expect(err).to.not.exist;
                 expect(Object.keys(result).length).to.equal(0);
@@ -211,10 +211,14 @@ describe('Items', function () {
                 fn2: function (next) {
 
                     next(new Error('This is my error'));
+                },
+                fn3: function (next) {
+
+                    next();
                 }
             };
 
-            Items.parallelExec(fns, function (err, result) {
+            Items.parallel.execute(fns, function (err, result) {
 
                 expect(err).to.exist;
                 expect(result).to.not.exist;
