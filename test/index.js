@@ -206,15 +206,25 @@ describe('Items', function () {
             var fns = {
                 fn1: function (next) {
 
-                    next(null, 'bye');
+                    setImmediate(function () {
+
+                        next(null, 'hello');
+                    });
                 },
                 fn2: function (next) {
 
-                    next(new Error('This is my error'));
+                    setImmediate(function () {
+
+                        next(new Error('This is my error'));
+                    });
+
                 },
                 fn3: function (next) {
 
-                    next();
+                    setImmediate(function () {
+
+                        next(null, 'bye');
+                    });
                 }
             };
 
@@ -222,6 +232,33 @@ describe('Items', function () {
 
                 expect(err).to.exist;
                 expect(result).to.not.exist;
+                done();
+            });
+        });
+
+        it('exits early and doesn\'t execute other functions on an error', function (done) {
+
+            var fn2Executed = false;
+            var fns = {
+                fn1: function (next) {
+
+                    next(new Error('This is my error'));
+                },
+                fn2: function (next) {
+
+                    setImmediate(function () {
+
+                        fn2Executed = true;
+                        next();
+                    });
+                }
+            };
+
+            Items.parallel.execute(fns, function (err, result) {
+
+                expect(err).to.exist;
+                expect(result).to.not.exist;
+                expect(fn2Executed).to.equal(false);
                 done();
             });
         });
