@@ -262,5 +262,32 @@ describe('Items', function () {
                 done();
             });
         });
+
+        it('handles multiple errors being returned by sending first error', function (done) {
+
+            var fns = {
+                fn1: function (next) {
+
+                    next(new Error('fn1'));
+                },
+                fn2: function (next) {
+
+                    next(new Error('fn2'));
+
+                },
+                fn3: function (next) {
+
+                    next(new Error('fn3'));
+                }
+            };
+
+            Items.parallel.execute(fns, function (err, result) {
+
+                expect(err).to.exist;
+                expect(result).to.not.exist;
+                expect(err.message).to.equal('fn1');
+                done();
+            });
+        });
     });
 });
