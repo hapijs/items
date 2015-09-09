@@ -34,7 +34,7 @@ describe('Items', function () {
 
             Items.serial(array, method, function (err) {
 
-                expect(err).to.not.exist;
+                expect(err).to.not.exist();
                 expect(called).to.deep.equal(array);
                 done();
             });
@@ -52,7 +52,7 @@ describe('Items', function () {
 
             Items.serial(array, method, function (err) {
 
-                expect(err).to.not.exist;
+                expect(err).to.not.exist();
                 expect(called).to.deep.equal(array);
                 done();
             });
@@ -66,7 +66,7 @@ describe('Items', function () {
 
                 called.push(item);
                 if (item === 3) {
-                    return next('error')
+                    return next('error');
                 }
 
                 setTimeout(next, 5);
@@ -98,7 +98,7 @@ describe('Items', function () {
 
             Items.parallel(array, method, function (err) {
 
-                expect(err).to.not.exist;
+                expect(err).to.not.exist();
                 expect(called).to.deep.equal([1, 3, 4, 2, 5]);
                 done();
             });
@@ -119,7 +119,7 @@ describe('Items', function () {
 
             Items.parallel(array, method, function (err) {
 
-                expect(err).to.not.exist;
+                expect(err).to.not.exist();
                 expect(called).to.deep.equal([]);
                 done();
             });
@@ -134,7 +134,7 @@ describe('Items', function () {
                 setTimeout(function () {
 
                     if (item[0] === 3) {
-                        return next('error')
+                        return next('error');
                     }
 
                     called.push(item[0]);
@@ -173,7 +173,7 @@ describe('Items', function () {
 
             Items.parallel.execute(fns, function (err, result) {
 
-                expect(err).to.not.exist;
+                expect(err).to.not.exist();
                 expect(result.fn1).to.equal('bye');
                 expect(result.fn2).to.equal('hi');
                 done();
@@ -186,7 +186,7 @@ describe('Items', function () {
 
             Items.parallel.execute(fns, function (err, result) {
 
-                expect(err).to.not.exist;
+                expect(err).to.not.exist();
                 expect(Object.keys(result).length).to.equal(0);
                 done();
             });
@@ -196,7 +196,7 @@ describe('Items', function () {
 
             Items.parallel.execute(null, function (err, result) {
 
-                expect(err).to.not.exist;
+                expect(err).to.not.exist();
                 expect(Object.keys(result).length).to.equal(0);
                 done();
             });
@@ -231,8 +231,8 @@ describe('Items', function () {
 
             Items.parallel.execute(fns, function (err, result) {
 
-                expect(err).to.exist;
-                expect(result).to.not.exist;
+                expect(err).to.exist();
+                expect(result).to.not.exist();
                 done();
             });
         });
@@ -257,8 +257,8 @@ describe('Items', function () {
 
             Items.parallel.execute(fns, function (err, result) {
 
-                expect(err).to.exist;
-                expect(result).to.not.exist;
+                expect(err).to.exist();
+                expect(result).to.not.exist();
                 expect(fn2Executed).to.equal(false);
                 done();
             });
@@ -284,8 +284,8 @@ describe('Items', function () {
 
             Items.parallel.execute(fns, function (err, result) {
 
-                expect(err).to.exist;
-                expect(result).to.not.exist;
+                expect(err).to.exist();
+                expect(result).to.not.exist();
                 expect(err.message).to.equal('fn1');
                 done();
             });
