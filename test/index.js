@@ -1,38 +1,40 @@
+'use strict';
+
 // Load modules
 
-var Code = require('code');
-var Lab = require('lab');
-var Items = require('../');
+const Code = require('code');
+const Lab = require('lab');
+const Items = require('../');
 
 
 // Declare internals
 
-var internals = {};
+const internals = {};
 
 
 // Test shortcuts
 
-var lab = exports.lab = Lab.script();
-var describe = lab.experiment;
-var it = lab.it;
-var expect = Code.expect;
+const lab = exports.lab = Lab.script();
+const describe = lab.experiment;
+const it = lab.it;
+const expect = Code.expect;
 
 
-describe('Items', function () {
+describe('Items', () => {
 
-    describe('serial()', function () {
+    describe('serial()', () => {
 
-        it('calls methods in serial', function (done) {
+        it('calls methods in serial', (done) => {
 
-            var called = [];
-            var array = [1, 2, 3, 4, 5];
-            var method = function (item, next) {
+            const called = [];
+            const array = [1, 2, 3, 4, 5];
+            const method = function (item, next) {
 
                 called.push(item);
                 setTimeout(next, 5);
             };
 
-            Items.serial(array, method, function (err) {
+            Items.serial(array, method, (err) => {
 
                 expect(err).to.not.exist();
                 expect(called).to.deep.equal(array);
@@ -40,17 +42,17 @@ describe('Items', function () {
             });
         });
 
-        it('skips on empty array', function (done) {
+        it('skips on empty array', (done) => {
 
-            var called = [];
-            var array = [];
-            var method = function (item, next) {
+            const called = [];
+            const array = [];
+            const method = function (item, next) {
 
                 called.push(item);
                 setTimeout(next, 5);
             };
 
-            Items.serial(array, method, function (err) {
+            Items.serial(array, method, (err) => {
 
                 expect(err).to.not.exist();
                 expect(called).to.deep.equal(array);
@@ -58,11 +60,11 @@ describe('Items', function () {
             });
         });
 
-        it('aborts with error', function (done) {
+        it('aborts with error', (done) => {
 
-            var called = [];
-            var array = [1, 2, 3, 4, 5];
-            var method = function (item, next) {
+            const called = [];
+            const array = [1, 2, 3, 4, 5];
+            const method = function (item, next) {
 
                 called.push(item);
                 if (item === 3) {
@@ -72,7 +74,7 @@ describe('Items', function () {
                 setTimeout(next, 5);
             };
 
-            Items.serial(array, method, function (err) {
+            Items.serial(array, method, (err) => {
 
                 expect(err).to.equal('error');
                 expect(called).to.deep.equal([1, 2, 3]);
@@ -81,22 +83,22 @@ describe('Items', function () {
         });
     });
 
-    describe('parallel()', function () {
+    describe('parallel()', () => {
 
-        it('calls methods in parallel', function (done) {
+        it('calls methods in parallel', (done) => {
 
-            var called = [];
-            var array = [[1, 1], [2, 4], [3, 2], [4, 3], [5, 5]];
-            var method = function (item, next) {
+            const called = [];
+            const array = [[1, 1], [2, 4], [3, 2], [4, 3], [5, 5]];
+            const method = function (item, next) {
 
-                setTimeout(function () {
+                setTimeout(() => {
 
                     called.push(item[0]);
                     next();
                 }, item[1]);
             };
 
-            Items.parallel(array, method, function (err) {
+            Items.parallel(array, method, (err) => {
 
                 expect(err).to.not.exist();
                 expect(called).to.deep.equal([1, 3, 4, 2, 5]);
@@ -104,20 +106,20 @@ describe('Items', function () {
             });
         });
 
-        it('skips on empty array', function (done) {
+        it('skips on empty array', (done) => {
 
-            var called = [];
-            var array = [];
-            var method = function (item, next) {
+            const called = [];
+            const array = [];
+            const method = function (item, next) {
 
-                setTimeout(function () {
+                setTimeout(() => {
 
                     called.push(item[0]);
                     next();
                 }, item[1]);
             };
 
-            Items.parallel(array, method, function (err) {
+            Items.parallel(array, method, (err) => {
 
                 expect(err).to.not.exist();
                 expect(called).to.deep.equal([]);
@@ -125,13 +127,13 @@ describe('Items', function () {
             });
         });
 
-        it('aborts with error', function (done) {
+        it('aborts with error', (done) => {
 
-            var called = [];
-            var array = [[1, 1], [2, 4], [3, 2], [4, 3], [5, 5]];
-            var method = function (item, next) {
+            const called = [];
+            const array = [[1, 1], [2, 4], [3, 2], [4, 3], [5, 5]];
+            const method = function (item, next) {
 
-                setTimeout(function () {
+                setTimeout(() => {
 
                     if (item[0] === 3) {
                         return next('error');
@@ -142,12 +144,12 @@ describe('Items', function () {
                 }, item[1]);
             };
 
-            Items.parallel(array, method, function (err) {
+            Items.parallel(array, method, (err) => {
 
                 expect(err).to.equal('error');
                 expect(called).to.deep.equal([1]);
 
-                setTimeout(function () {
+                setTimeout(() => {
 
                     expect(called).to.deep.equal([1, 4, 2, 5]);
                     done();
@@ -156,11 +158,11 @@ describe('Items', function () {
         });
     });
 
-    describe('parallel.execute()', function () {
+    describe('parallel.execute()', () => {
 
-        it('calls methods in parallel and returns the result', function (done) {
+        it('calls methods in parallel and returns the result', (done) => {
 
-            var fns = {
+            const fns = {
                 fn1: function (next) {
 
                     next(null, 'bye');
@@ -171,7 +173,7 @@ describe('Items', function () {
                 }
             };
 
-            Items.parallel.execute(fns, function (err, result) {
+            Items.parallel.execute(fns, (err, result) => {
 
                 expect(err).to.not.exist();
                 expect(result.fn1).to.equal('bye');
@@ -180,21 +182,11 @@ describe('Items', function () {
             });
         });
 
-        it('returns an empty object to the callback when passed an empty object', function (done) {
+        it('returns an empty object to the callback when passed an empty object', (done) => {
 
-            var fns = {};
+            const fns = {};
 
-            Items.parallel.execute(fns, function (err, result) {
-
-                expect(err).to.not.exist();
-                expect(Object.keys(result).length).to.equal(0);
-                done();
-            });
-        });
-
-        it('returns an empty object to the callback when passed a null object', function (done) {
-
-            Items.parallel.execute(null, function (err, result) {
+            Items.parallel.execute(fns, (err, result) => {
 
                 expect(err).to.not.exist();
                 expect(Object.keys(result).length).to.equal(0);
@@ -202,19 +194,29 @@ describe('Items', function () {
             });
         });
 
-        it('exits early and result object is missing when an error is passed to callback', function (done) {
+        it('returns an empty object to the callback when passed a null object', (done) => {
 
-            var fns = {
+            Items.parallel.execute(null, (err, result) => {
+
+                expect(err).to.not.exist();
+                expect(Object.keys(result).length).to.equal(0);
+                done();
+            });
+        });
+
+        it('exits early and result object is missing when an error is passed to callback', (done) => {
+
+            const fns = {
                 fn1: function (next) {
 
-                    setImmediate(function () {
+                    setImmediate(() => {
 
                         next(null, 'hello');
                     });
                 },
                 fn2: function (next) {
 
-                    setImmediate(function () {
+                    setImmediate(() => {
 
                         next(new Error('This is my error'));
                     });
@@ -222,14 +224,14 @@ describe('Items', function () {
                 },
                 fn3: function (next) {
 
-                    setImmediate(function () {
+                    setImmediate(() => {
 
                         next(null, 'bye');
                     });
                 }
             };
 
-            Items.parallel.execute(fns, function (err, result) {
+            Items.parallel.execute(fns, (err, result) => {
 
                 expect(err).to.exist();
                 expect(result).to.not.exist();
@@ -237,17 +239,17 @@ describe('Items', function () {
             });
         });
 
-        it('exits early and doesn\'t execute other functions on an error', function (done) {
+        it('exits early and doesn\'t execute other functions on an error', (done) => {
 
-            var fn2Executed = false;
-            var fns = {
+            let fn2Executed = false;
+            const fns = {
                 fn1: function (next) {
 
                     next(new Error('This is my error'));
                 },
                 fn2: function (next) {
 
-                    setImmediate(function () {
+                    setImmediate(() => {
 
                         fn2Executed = true;
                         next();
@@ -255,7 +257,7 @@ describe('Items', function () {
                 }
             };
 
-            Items.parallel.execute(fns, function (err, result) {
+            Items.parallel.execute(fns, (err, result) => {
 
                 expect(err).to.exist();
                 expect(result).to.not.exist();
@@ -264,9 +266,9 @@ describe('Items', function () {
             });
         });
 
-        it('handles multiple errors being returned by sending first error', function (done) {
+        it('handles multiple errors being returned by sending first error', (done) => {
 
-            var fns = {
+            const fns = {
                 fn1: function (next) {
 
                     next(new Error('fn1'));
@@ -282,7 +284,7 @@ describe('Items', function () {
                 }
             };
 
-            Items.parallel.execute(fns, function (err, result) {
+            Items.parallel.execute(fns, (err, result) => {
 
                 expect(err).to.exist();
                 expect(result).to.not.exist();
