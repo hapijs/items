@@ -27,10 +27,12 @@ describe('Items', () => {
         it('calls methods in serial', (done) => {
 
             const called = [];
+            const is = [];
             const array = [1, 2, 3, 4, 5];
-            const method = function (item, next) {
+            const method = function (item, next, i) {
 
                 called.push(item);
+                is.push(i);
                 setTimeout(next, 5);
             };
 
@@ -38,6 +40,7 @@ describe('Items', () => {
 
                 expect(err).to.not.exist();
                 expect(called).to.deep.equal(array);
+                expect(is).to.deep.equal([0, 1, 2, 3, 4]);
                 done();
             });
         });
@@ -89,8 +92,10 @@ describe('Items', () => {
 
             const called = [];
             const array = [[1, 1], [2, 4], [3, 2], [4, 3], [5, 5]];
-            const method = function (item, next) {
+            const is = [];
+            const method = function (item, next, i) {
 
+                is.push(i);
                 setTimeout(() => {
 
                     called.push(item[0]);
@@ -102,6 +107,7 @@ describe('Items', () => {
 
                 expect(err).to.not.exist();
                 expect(called).to.deep.equal([1, 3, 4, 2, 5]);
+                expect(is).to.deep.equal([0, 1, 2, 3, 4]);
                 done();
             });
         });
