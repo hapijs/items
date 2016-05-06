@@ -12,9 +12,10 @@ Lead Maintainer - [Raquel Vélez](https://github.com/rockbot)
 Runs `method` against each value in the `items` array *in series*. `callback` is executed when all of the tasks are complete. Calling back with an error will short-circuit the remaining tasks.
 
 - `items` an array of items to pass to `method`.
-- `method` a function with the signature `function (item, next)`.
+- `method` a function with the signature `function (item, next, i)`.
     - `item` - is the currently processing item in the `items` array.
     - `next` - callback function to indicate the end of processing for `item`. Calling `next` with a truthy parameter indicates an error and ends `Items.serial`.
+    - `i` - The current item's index in the `items` array.
 - `callback` - a function with the signature `function (err)`.
     - `err` - indicates any errors during processing.
 
@@ -23,9 +24,10 @@ Runs `method` against each value in the `items` array *in series*. `callback` is
 Runs `method` against each value in the `items` array *in parallel*. `callback` is executed when all of the tasks are complete. Calling back with an error will short-circuit the remaining tasks.
 
 - `items` an array of items to pass to `method`.
-- `method` a function with the signature `function (item, next)`.
+- `method` a function with the signature `function (item, next, i)`.
     - `item` - is the currently processing item in the `items` array.
     - `next` - callback function to indicate the end of processing for `item`. Calling `next` with a truthy parameter indicates an error and ends `Items.serial`.
+    - `i` - The current item's index in the `items` array.
 - `callback` - a function with the signature `function (err)`.
     - `err` - indicates any errors during processing.
 
