@@ -26,7 +26,7 @@ Runs `method` against each value in the `items` array *in parallel*. `callback` 
 - `items` an array of items to pass to `method`.
 - `method` a function with the signature `function (item, next, i)`.
     - `item` - is the currently processing item in the `items` array.
-    - `next` - callback function to indicate the end of processing for `item`. Calling `next` with a truthy parameter indicates an error and ends `Items.serial`.
+    - `next` - callback function to indicate the end of processing for `item`. Calling `next` with a truthy parameter indicates an error and ends `Items.parallel`.
     - `i` - The current item's index in the `items` array.
 - `callback` - a function with the signature `function (err)`.
     - `err` - indicates any errors during processing.
