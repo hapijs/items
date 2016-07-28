@@ -39,8 +39,8 @@ describe('Items', () => {
             Items.serial(array, method, (err) => {
 
                 expect(err).to.not.exist();
-                expect(called).to.deep.equal(array);
-                expect(is).to.deep.equal([0, 1, 2, 3, 4]);
+                expect(called).to.equal(array);
+                expect(is).to.equal([0, 1, 2, 3, 4]);
                 done();
             });
         });
@@ -58,7 +58,7 @@ describe('Items', () => {
             Items.serial(array, method, (err) => {
 
                 expect(err).to.not.exist();
-                expect(called).to.deep.equal(array);
+                expect(called).to.equal(array);
                 done();
             });
         });
@@ -80,7 +80,7 @@ describe('Items', () => {
             Items.serial(array, method, (err) => {
 
                 expect(err).to.equal('error');
-                expect(called).to.deep.equal([1, 2, 3]);
+                expect(called).to.equal([1, 2, 3]);
                 done();
             });
         });
@@ -106,8 +106,8 @@ describe('Items', () => {
             Items.parallel(array, method, (err) => {
 
                 expect(err).to.not.exist();
-                expect(called).to.deep.equal([1, 3, 4, 2, 5]);
-                expect(is).to.deep.equal([0, 1, 2, 3, 4]);
+                expect(called).to.equal([1, 3, 4, 2, 5]);
+                expect(is).to.equal([0, 1, 2, 3, 4]);
                 done();
             });
         });
@@ -128,7 +128,7 @@ describe('Items', () => {
             Items.parallel(array, method, (err) => {
 
                 expect(err).to.not.exist();
-                expect(called).to.deep.equal([]);
+                expect(called).to.equal([]);
                 done();
             });
         });
@@ -153,11 +153,11 @@ describe('Items', () => {
             Items.parallel(array, method, (err) => {
 
                 expect(err).to.equal('error');
-                expect(called).to.deep.equal([1]);
+                expect(called).to.equal([1]);
 
                 setTimeout(() => {
 
-                    expect(called).to.deep.equal([1, 4, 2, 5]);
+                    expect(called).to.equal([1, 4, 2, 5]);
                     done();
                 }, 6);
             });
