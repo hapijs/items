@@ -9,9 +9,6 @@
     "serial",
     "parallel"
   ],
-  "engines": {
-    "node": ">=4.0.0"
-  },
   "dependencies": {
   },
   "devDependencies": {
@@ -19,8 +16,8 @@
     "lab": "13.x.x"
   },
   "scripts": {
-    "test": "lab -a code -t 100 -L",
-    "test-cov-html": "lab -a code -r html -o coverage.html"
+    "test": "lab -a code -t 100 -L -I SharedArrayBuffer,Atomics",
+    "test-cov-html": "lab -a code -r html -o coverage.html -I SharedArrayBuffer,Atomics"
   },
   "license": "BSD-3-Clause"
 }
