@@ -3,11 +3,15 @@
 Bare minimum async methods adapted specifically for the very limited **hapi** core use cases. Use
 [async](https://github.com/caolan/async) for all your application needs.
 
-[![Build Status](https://secure.travis-ci.org/hapijs/items.png)](http://travis-ci.org/hapijs/items)
+[![Build Status](https://travis-ci.org/hapijs/items.svg?branch=v2-commercial)](https://travis-ci.org/hapijs/items)
 
-Lead Maintainer - [Eran Hammer](https://github.com/hueniverse)
+## License
 
-## `Items.serial(items, method, callback)`
+This version of the package requires a commercial license. You may not use, copy, or distribute it without first acquiring a commercial license from Sideway Inc. Using this software without a license is a violation of US and international law. To obtain a license, please contact [sales@sideway.com](mailto:sales@sideway.com). The open source version of this package can be found [here](https://github.com/hapijs/boom).
+
+## Usage
+
+### `Items.serial(items, method, callback)`
 
 Runs `method` against each value in the `items` array *in series*. `callback` is executed when all of the tasks are complete. Calling back with an error will short-circuit the remaining tasks.
 
@@ -19,7 +23,7 @@ Runs `method` against each value in the `items` array *in series*. `callback` is
 - `callback` - a function with the signature `function (err)`.
     - `err` - indicates any errors during processing.
 
-## `Items.parallel(items, method, callback)`
+### `Items.parallel(items, method, callback)`
 
 Runs `method` against each value in the `items` array *in parallel*. `callback` is executed when all of the tasks are complete. Calling back with an error will short-circuit the remaining tasks.
 
@@ -31,7 +35,7 @@ Runs `method` against each value in the `items` array *in parallel*. `callback` 
 - `callback` - a function with the signature `function (err)`.
     - `err` - indicates any errors during processing.
 
-## `Items.parallel.execute(tasks, callback)`
+### `Items.parallel.execute(tasks, callback)`
 
 Runs all of the functions in `tasks` *in parallel* and stores the results in a collector object passed into `callback`. If any of the tasks callback with an error, the collector object is `null`.
 
