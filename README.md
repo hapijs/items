@@ -1,4 +1,4 @@
-# items
+# @commercial/items
 
 Bare minimum async methods adapted specifically for the very limited **hapi** core use cases. Use
 [async](https://github.com/caolan/async) for all your application needs.
