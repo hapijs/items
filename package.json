@@ -9,6 +9,9 @@
     "serial",
     "parallel"
   ],
+  "files": [
+    "lib"
+  ],
   "dependencies": {},
   "devDependencies": {
     "code": "4.x.x",
