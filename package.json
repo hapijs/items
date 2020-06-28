@@ -3,6 +3,9 @@
   "description": "Bare minimum async methods",
   "version": "2.2.0",
   "repository": "git://github.com/hapijs/items",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "main": "lib/index.js",
   "keywords": [
     "async",
