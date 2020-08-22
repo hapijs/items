@@ -1,9 +1,7 @@
-language: node_js
+version: ~> 1.0
 
-node_js:
-  - "6"
-  - "8"
-  - "10"
-  - "12"
 
-sudo: false
+import:
+  - hapijs/ci-config-travis:node_js.yml@main
+  - hapijs/ci-config-travis:install.yml@main
+  - hapijs/ci-config-travis:os.yml@main
