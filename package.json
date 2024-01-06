@@ -1,5 +1,5 @@
 {
-  "name": "@commercial/items",
+  "name": "items",
   "description": "Bare minimum async methods",
   "version": "2.2.0",
   "repository": "git://github.com/hapijs/items",
