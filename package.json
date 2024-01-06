@@ -1,7 +1,7 @@
 {
   "name": "items",
   "description": "Bare minimum async methods",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "repository": "git://github.com/hapijs/items",
   "engines": {
     "node": ">=6.0.0"
